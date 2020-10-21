@@ -15,6 +15,8 @@ Suitable for applications that have their own database control.
     $ npm install mysql
     ```
 
+</details>
+
 ## Config
 
 MyJson auto read ./dbs/ directory to load/store databases
