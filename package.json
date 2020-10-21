@@ -1,7 +1,7 @@
 {
-  "name": "myjson",
+  "name": "myjson-box",
   "version": "1.0.0",
-  "description": "Not SQL DB",
+  "description": "Persistence for JSON data, as a database NO SQL",
   "main": "main.js",
   "scripts": {
     "start": "node ./src/main.js",
@@ -14,10 +14,7 @@
   ],
   "author": "Pablo Rosique Vidal",
   "license": "MIT",
-  "dependencies": {
-    "nodemon": "^2.0.6",
-    "npm-pack-zip": "^1.2.7"
-  },
+  "dependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pableke/myjson.git"
@@ -25,5 +22,9 @@
   "bugs": {
     "url": "https://github.com/pableke/myjson/issues"
   },
-  "homepage": "https://github.com/pableke/myjson#readme"
+  "homepage": "https://github.com/pableke/myjson#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "npm-pack-zip": "^1.2.7"
+  }
 }
