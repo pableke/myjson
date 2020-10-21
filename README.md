@@ -1,5 +1,11 @@
 # MyJSON
+
 Standalone and simple persistence for JSON data, as a database NO SQL
+
+## How It Works
+
+1. Build a tree directory structure as user definition.
+2.- Load / store data according previous structure
 
 ## Usage
 
@@ -12,7 +18,7 @@ Suitable for applications that have their own database control.
 1. Install by npm:
 
     ```sh
-    $ npm install mysql
+    $ npm install myjson
     ```
 
 </details>
