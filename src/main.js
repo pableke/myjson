@@ -12,5 +12,10 @@ myjson.create("company").then(company => {
     return users.deleteById(5);
 }).then(users => {
     console.log(users.findById(2));
-    myjson.create("test").then(dbs => myjson.drop("test"));
+});
+
+myjson.create("test").then(test => {
+    return test.create("products");
+}).then(products => {
+    products.save({name:"laptop", price:99.32});
 });
