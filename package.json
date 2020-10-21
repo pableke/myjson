@@ -1,0 +1,20 @@
+{
+  "name": "myjson",
+  "version": "1.0.0",
+  "description": "Not SQL DB",
+  "main": "main.js",
+  "scripts": {
+    "start": "node ./src/main.js",
+    "dev": "nodemon ./src/main.js",
+    "zip": "rm myjson.zip & npm-pack-zip"
+  },
+  "keywords": [
+    "database"
+  ],
+  "author": "Pablo Rosique Vidal",
+  "license": "MIT",
+  "dependencies": {
+    "nodemon": "^2.0.6",
+    "npm-pack-zip": "^1.2.7"
+  }
+}
