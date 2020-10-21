@@ -16,24 +16,15 @@ function fnError(err) {
 
 exports.create = function(name) {
     return new Promise(function(resolve, reject) {
-        if (name) {
-            DBS[name] = new Collections(dirname + name);
-            return resolve(DBS);
-        }
+        if (DBS[name])
+            return resolve(DBS[name]);
 
         //create the directory container
         fs.mkdir(dirname + name, 0777, err => {
             if (err && (err.code != "EEXIST"))
                 return reject(fnError(err));
-        });
-        //load all databases from directories
-        fs.readdir(dirname, (err, files) => {
-            if (err)
-                return reject(fnError(err));
-            files.forEach(file => {
-                DBS[file] = new Collections(dirname + file);
-            });
-            resolve(DBS);
+            DBS[name] = new Collections(dirname + name);
+            return resolve(DBS[name]);
         });
     });
 }
@@ -43,12 +34,11 @@ exports.drop = function(name) {
     return Promise.resolve(DBS);
 }
 exports.get = function(name) {
-    DBS[name] = DBS[name] || new Collections(dirname + name);
     return Promise.resolve(DBS[name]);
 }
 
 //create the directory container
 fs.mkdir(dirname, 0777, err => {
     if (err && (err.code != "EEXIST"))
-        return reject(fnError(err));
+        return fnError(err);
 });

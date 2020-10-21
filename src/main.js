@@ -1,9 +1,8 @@
 
 const myjson = require("./myjson")
 
-myjson.create().then(dbs => {
-    //console.log(dbs);
-    return dbs.company.create("menus");
+myjson.create("company").then(company => {
+    return company.create("menus");
 }).then(menus => {
     menus.save({_id:2, href: "#top", text: "anchor"});
     return myjson.get("company");
