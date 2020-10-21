@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node ./src/main.js",
     "dev": "nodemon ./src/main.js",
+    "test": "node ./src/test.js",
     "zip": "rm myjson.zip & npm-pack-zip"
   },
   "keywords": [

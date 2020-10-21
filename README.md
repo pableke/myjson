@@ -47,3 +47,8 @@ MyJson auto read ./dbs/ directory to load/store databases
        myjson.create("test").then(dbs => myjson.drop("test"));
    });
    ```
+
+### test
+```
+npm test
+```
