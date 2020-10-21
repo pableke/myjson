@@ -30,25 +30,30 @@ MyJson auto read ./dbs/ directory to load/store databases
 1. myjson.create():
 
    ```
-   const myjson = require("./myjson")
+    const myjson = require("./myjson")
 
-   myjson.create().then(dbs => {
-       //console.log(dbs);
-       return dbs.company.create("menus");
-   }).then(menus => {
-       menus.insert({href: "#", text: "anchor"});
-       return myjson.get("company");
-   }).then(company => {
-       return company.get("users");
-   }).then(users => {
-       return users.deleteById(5);
-   }).then(users => {
-       console.log(users.findById(2));
-       myjson.create("test").then(dbs => myjson.drop("test"));
-   });
+    myjson.create("company").then(company => {
+        return company.create("menus");
+    }).then(menus => {
+        menus.save({_id:2, href: "#top", text: "anchor"});
+        return myjson.get("company");
+    }).then(company => {
+        return company.get("users");
+    }).then(users => {
+        return users.deleteById(5);
+    }).then(users => {
+        console.log(users.findById(2));
+    });
+
+    myjson.create("test").then(test => {
+        return test.create("products");
+    }).then(products => {
+        products.save({name:"laptop", price:99.32});
+    });
    ```
 
 ### test
+
 ```
 npm test
 ```
