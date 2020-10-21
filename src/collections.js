@@ -43,13 +43,7 @@ module.exports = function(pathname) {
             self.get(last).then(table => { tablesLoaded.push(table); resolve(tablesLoaded); });
         });
     }
-    /*this.join = function(cb, tables) {
+    this.join = function(cb, tables) {
         return this.load(tables).then(tables => tables.shift().join(cb, tables));
-    }*/
-
-    //create the directory container
-    fs.mkdir(pathname, 0777, err => {
-        if (err && (err.code != "EEXIST"))
-            fnError(err);
-    });
+    }
 }

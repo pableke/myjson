@@ -61,11 +61,14 @@ module.exports = function(pathname) {
     }
     this.updateById = function(data) {
         let row = this.find(row => (row._id == data._id));
-        row && Object.assign(row, data);
-        return this.commit();
+        if (row) {
+            Object.assign(row, data);
+            return this.commit();
+        }
+        return Promise.resolve(self);
     }
     this.save = function(data) {
-        return data_id ? this.updateById(data) : this.insert(data);
+        return data._id ? this.updateById(data) : this.insert(data);
     }
     this.delete = function(cb) {
         table.data.forEach((row, i) => { cb(row, i) && table.data.splice(i, 1); });

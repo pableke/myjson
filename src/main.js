@@ -5,7 +5,7 @@ myjson.create().then(dbs => {
     //console.log(dbs);
     return dbs.company.create("menus");
 }).then(menus => {
-    menus.insert({href: "#", text: "anchor"});
+    menus.save({_id:2, href: "#top", text: "anchor"});
     return myjson.get("company");
 }).then(company => {
     return company.get("users");

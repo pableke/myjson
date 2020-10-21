@@ -21,6 +21,11 @@ exports.create = function(name) {
             return resolve(DBS);
         }
 
+        //create the directory container
+        fs.mkdir(dirname + name, 0777, err => {
+            if (err && (err.code != "EEXIST"))
+                return reject(fnError(err));
+        });
         //load all databases from directories
         fs.readdir(dirname, (err, files) => {
             if (err)
@@ -41,3 +46,9 @@ exports.get = function(name) {
     DBS[name] = DBS[name] || new Collections(dirname + name);
     return Promise.resolve(DBS[name]);
 }
+
+//create the directory container
+fs.mkdir(dirname, 0777, err => {
+    if (err && (err.code != "EEXIST"))
+        return reject(fnError(err));
+});
