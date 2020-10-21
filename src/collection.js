@@ -26,7 +26,7 @@ module.exports = function(pathname) {
             });
         });
     }
-    this.save = function() {
+    this.commit = function() {
         return new Promise(function(resolve, reject) {
             fs.writeFile(pathname + ".json", JSON.stringify(table), err => {
                 err ? reject(fnError(err)) : resolve(self);
@@ -53,21 +53,29 @@ module.exports = function(pathname) {
     this.insert = function(data) {
         data._id = table.seq++;
         table.data.push(data);
-        return this.save();
+        return this.commit();
     }
     this.update = function(cb, data) {
         table.data.forEach((row, i) => { cb(row, i) && Object.assign(row, data); });
-        return this.save();
+        return this.commit();
+    }
+    this.updateById = function(data) {
+        let row = this.find(row => (row._id == data._id));
+        row && Object.assign(row, data);
+        return this.commit();
+    }
+    this.save = function(data) {
+        return data_id ? this.updateById(data) : this.insert(data);
     }
     this.delete = function(cb) {
         table.data.forEach((row, i) => { cb(row, i) && table.data.splice(i, 1); });
-        return this.save();
+        return this.commit();
     }
     this.deleteById = function(id) {
         let i = table.data.findIndex(row => (row._id == id));
         if (i < 0) //is table modified?
             return Promise.resolve(self);
         table.data.splice(i, 1);
-        return this.save();
+        return this.commit();
     }
 }

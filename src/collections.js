@@ -31,16 +31,21 @@ module.exports = function(pathname) {
     }
 
     this.get = function(name) {
-        return new Promise(function(resolve) {
+        return new Promise(function(resolve) { //get table or preloaded
             db[name] ? resolve(db[name]) : setTable(name).then(resolve);
         });
     }
-    this.load = function(tables) {
-        return tables.map(table => self.get(table)).pop();
+    this.load = function(tables) { //table names
+        return new Promise(function(resolve) {
+            let tablesLoaded = []; //tables container
+            let last = tables.pop(); //extract last table name
+            tables.forEach(table => self.get(table).then(table => { tablesLoaded.push(table); }));
+            self.get(last).then(table => { tablesLoaded.push(table); resolve(tablesLoaded); });
+        });
     }
-    this.join = function(cb, tables) {
-        return tables.shift().join(cb, tables);
-    }
+    /*this.join = function(cb, tables) {
+        return this.load(tables).then(tables => tables.shift().join(cb, tables));
+    }*/
 
     //create the directory container
     fs.mkdir(pathname, 0777, err => {
