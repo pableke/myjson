@@ -43,12 +43,12 @@ module.exports = function(pathname) {
         });
     }
 
-    this.findAll = function() { return table.data; }
-    this.find = function(cb) { return table.data.find(cb); }
-    this.findById = function(id) { return this.find(row => (row._id == id)); }
-    this.filter = function(cb) { return table.data.filter(cb); }
-    this.each = function(cb) { table.data.forEach(cb); return this; }
-    this.join = function(cb, tables) { return table.data.filter((row, i) => cb(row, i, tables)); }
+    this.findAll = function() { return Promise.resolve(table.data); }
+    this.find = function(cb) { return Promise.resolve(table.data.find(cb)); }
+    this.findById = function(id) { return Promise.resolve(this.find(row => (row._id == id))); }
+    this.filter = function(cb) { return Promise.resolve(table.data.filter(cb)); }
+    this.each = function(cb) { table.data.forEach(cb); return Promise.resolve(self); }
+    this.join = function(cb, tables) { return Promise.resolve(table.data.filter((row, i) => cb(row, i, tables))); }
 
     this.insert = function(data) {
         data._id = table.seq++;

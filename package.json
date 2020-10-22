@@ -2,10 +2,10 @@
   "name": "myjson-box",
   "version": "1.0.0",
   "description": "Persistence for JSON data, as a database NO SQL",
-  "main": "main.js",
+  "main": "test.js",
   "scripts": {
-    "start": "node ./src/main.js",
-    "dev": "nodemon ./src/main.js",
+    "start": "node ./src/test.js",
+    "dev": "nodemon ./src/test.js",
     "test": "node ./src/test.js",
     "zip": "rm myjson.zip & npm-pack-zip"
   },
