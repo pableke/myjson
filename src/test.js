@@ -11,7 +11,9 @@ myjson.create("company").then(company => {
 }).then(users => {
     return users.deleteById(5);
 }).then(users => {
-    console.log(users.findById(2));
+    return users.findById(2);
+}).then(user => {
+    console.log(user);
 });
 
 myjson.create("test").then(test => {
