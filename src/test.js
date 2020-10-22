@@ -1,8 +1,9 @@
 
 const myjson = require("./myjson")
 
-myjson.create("company").then(company => {
-    return company.create("menus");
+myjson.open().then(dbs => {
+console.log(dbs);
+    return dbs.company.create("menus");
 }).then(menus => {
     menus.save({_id:2, href: "#top", text: "anchor"});
     return myjson.get("company");
@@ -19,5 +20,5 @@ myjson.create("company").then(company => {
 myjson.create("test").then(test => {
     return test.create("products");
 }).then(products => {
-    products.save({name:"laptop", price:99.32});
+    products.save({_id:1,name:"laptop", price:99.32});
 });
