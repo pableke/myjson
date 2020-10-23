@@ -2,7 +2,7 @@
   "name": "myjson-box",
   "version": "1.0.0",
   "description": "Persistence for JSON data, as a database NO SQL",
-  "main": "test.js",
+  "main": "./src/myjson.js",
   "scripts": {
     "start": "node ./src/test.js",
     "dev": "nodemon ./src/test.js",
