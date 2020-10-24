@@ -1,7 +1,7 @@
 
 const fs = require("fs"); //file system
 
-module.exports = function(pathname) {
+module.exports = function(db, pathname) {
     const self = this; //self instance
     let table = { seq: 1, data: [] };
 
@@ -14,8 +14,10 @@ module.exports = function(pathname) {
         return err;
     }
 
+    this.db = function() { return db; }
+    this.get = function(name) { return db.get(name); }
     this.load = function() {
-        return new Promise(function(resolve, reject) {
+            return new Promise(function(resolve, reject) {
             fs.readFile(pathname + ".json", "utf-8", (err, data) => {
                 if (err && err.code == "ENOENT")
                     return resolve(self);
@@ -43,12 +45,12 @@ module.exports = function(pathname) {
         });
     }
 
-    this.findAll = function() { return Promise.resolve(table.data); }
-    this.find = function(cb) { return Promise.resolve(table.data.find(cb)); }
-    this.findById = function(id) { return Promise.resolve(this.find(row => (row._id == id))); }
-    this.filter = function(cb) { return Promise.resolve(table.data.filter(cb)); }
-    this.each = function(cb) { table.data.forEach(cb); return Promise.resolve(self); }
-    this.join = function(cb, tables) { return Promise.resolve(table.data.filter((row, i) => cb(row, i, tables))); }
+    this.findAll = function() { return table.data; }
+    this.find = function(cb) { return table.data.find(cb); }
+    this.findById = function(id) { return this.find(row => (row._id == id)); }
+    this.filter = function(cb) { return table.data.filter(cb); }
+    this.each = function(cb) { table.data.forEach(cb); return self; }
+    this.join = function(cb, tables) { return table.data.filter((row, i) => cb(row, i, tables)); }
 
     this.insert = function(data) {
         data._id = table.seq++;

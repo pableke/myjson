@@ -2,19 +2,21 @@
 const myjson = require("./myjson")
 
 myjson.open().then(dbs => {
-console.log(dbs);
+    console.log("-------", "DataBases", "-------");
+    console.log(dbs);
     return dbs.company.create("menus");
 }).then(menus => {
+    console.log("-------", "MENUS", "-------");
+    console.log(menus);
     menus.save({_id:2, href: "#top", text: "anchor"});
-    return myjson.get("company");
-}).then(company => {
-    return company.get("users");
+    return menus.get("users");
 }).then(users => {
+    console.log("-------", "USERS", "-------");
+    console.log(users);
+    console.log("-------", "USER (5)", "-------");
     return users.deleteById(5);
 }).then(users => {
-    return users.findById(2);
-}).then(user => {
-    console.log(user);
+    console.log(users.findById(2));
 });
 
 myjson.create("test").then(test => {

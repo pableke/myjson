@@ -15,7 +15,7 @@ module.exports = function(pathname) {
         return err;
     }
     function addTable(name, table) { db[name] = table; return table.load(); }
-    function setTable(name) { return addTable(name, new Collection(pathname + "/" + name)); }
+    function setTable(name) { return addTable(name, new Collection(self, pathname + "/" + name)); }
 
     this.create = function(name) {
         db[name] && db[name].drop();
