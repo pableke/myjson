@@ -2,7 +2,7 @@
 const fs = require("fs"); //file system
 const Collection = require("./collection");
 
-module.exports = function(pathname) {
+module.exports = function(dbs, pathname) {
     const self = this; //self instance
     const db = {}; //container
 
@@ -30,6 +30,7 @@ module.exports = function(pathname) {
         });
     }
 
+    this.dbs = function() { return dbs; }
     this.get = function(name) {
         return new Promise(function(resolve) { //get table or preloaded
             db[name] ? resolve(db[name]) : setTable(name).then(resolve);
@@ -39,8 +40,10 @@ module.exports = function(pathname) {
         return new Promise(function(resolve) {
             let tablesLoaded = []; //tables container
             let last = tables.pop(); //extract last table name
-            tables.forEach(table => self.get(table).then(table => { tablesLoaded.push(table); }));
-            self.get(last).then(table => { tablesLoaded.push(table); resolve(tablesLoaded); });
+            let addTable = table => { tablesLoaded.push(table); };
+
+            tables.forEach(table => self.get(table).then(addTable));
+            self.get(last).then(table => { addTable(table); resolve(tablesLoaded); });
         });
     }
     this.join = function(cb, tables) {

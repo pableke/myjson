@@ -14,7 +14,7 @@ function fnError(err) {
     return err;
 }
 function fnAdd(name) {
-    DBS[name] = new Collections(dirname + name);
+    DBS[name] = new Collections(DBS, dirname + name);
     return DBS[name];
 }
 function fnOpen(name) {
