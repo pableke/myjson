@@ -30,7 +30,7 @@ MyJson auto read ./dbs/ directory to load/store databases
 1. myjson.create():
 
    ```
-    const myjson = require("./myjson")
+    const myjson = require("myjson-box")
 
     myjson.open().then(dbs => {
         console.log("-------", "DataBases", "-------");
