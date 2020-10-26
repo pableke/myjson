@@ -10,7 +10,10 @@
     "zip": "rm myjson.zip & npm-pack-zip"
   },
   "keywords": [
-    "database", "JSON", "async", "storage"
+    "database",
+    "JSON",
+    "async",
+    "storage"
   ],
   "author": "Pablo Rosique Vidal",
   "license": "MIT",
@@ -23,7 +26,9 @@
     "url": "https://github.com/pableke/myjson/issues"
   },
   "homepage": "https://github.com/pableke/myjson#readme",
-  "publishConfig": { "registry": "https://npm.pkg.github.com/" },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "devDependencies": {
     "nodemon": "^2.0.6",
     "npm-pack-zip": "^1.2.7"
