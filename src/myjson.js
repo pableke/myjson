@@ -11,6 +11,7 @@ function fnError(err) {
     console.log("--------------------", "Error", "--------------------");
     //err.message = "Error " + err.errno + ": " + err.sqlMessage;
     console.log(err);
+    console.log("--------------------", "MyJson", "--------------------\n");
     return err;
 }
 function fnAdd(name) {
