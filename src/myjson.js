@@ -34,6 +34,9 @@ function fnClose(name) {
     delete DBS[name];
 }
 
+exports.db = function(name) {
+    return DBS[name];
+}
 exports.get = fnOpen;
 exports.create = fnOpen;
 exports.drop = function(name) {
