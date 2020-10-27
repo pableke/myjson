@@ -12,6 +12,7 @@ module.exports = function(dbs, pathname) {
         console.log("--------------------", pathname, "--------------------");
         //err.message = "Error " + err.errno + ": " + err.sqlMessage;
         console.log(err);
+        console.log("--------------------", "Collections", "--------------------\n");
         return err;
     }
     function addTable(name, table) { db[name] = table; return table.load(); }

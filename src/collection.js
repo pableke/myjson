@@ -2,23 +2,24 @@
 const fs = require("fs"); //file system
 
 module.exports = function(db, pathname) {
-    const self = this; //self instance
-    let table = { seq: 1, data: [] };
+	const self = this; //self instance
+	let table = { seq: 1, data: [] };
 
-    function fnError(err) {
-        console.log("\n--------------------", "Table", "--------------------");
-        console.log("> " + (new Date()));
-        console.log("--------------------", pathname, "--------------------");
-        //err.message = "Error " + err.errno + ": " + err.sqlMessage;
-        console.log(err);
-        return err;
-    }
+	function fnError(err) {
+		console.log("\n--------------------", "Table", "--------------------");
+		console.log("> " + (new Date()));
+		console.log("--------------------", pathname, "--------------------");
+		//err.message = "Error " + err.errno + ": " + err.sqlMessage;
+		console.log(err);
+		console.log("--------------------", "Table", "--------------------\n");
+		return err;
+	}
 
-    this.db = function() { return db; }
-    this.get = function(name) { return db.get(name); }
-    this.load = function() {
-            return new Promise(function(resolve, reject) {
-            fs.readFile(pathname + ".json", "utf-8", (err, data) => {
+	this.db = function() { return db; }
+	this.get = function(name) { return db.get(name); }
+	this.load = function() {
+		return new Promise(function(resolve, reject) {
+		fs.readFile(pathname + ".json", "utf-8", (err, data) => {
                 if (err && err.code == "ENOENT")
                     return resolve(self);
                 if (err)
@@ -80,7 +81,7 @@ module.exports = function(db, pathname) {
         let i = table.data.findIndex(row => (row._id == id));
         if (i < 0) //is table modified?
             return Promise.resolve(self);
-        table.data.splice(i, 1);
-        return this.commit();
+		table.data.splice(i, 1);
+		return this.commit();
     }
 }
