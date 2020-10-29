@@ -1,8 +1,4 @@
 
-module.exports = {
-	
-}
-
 const fs = require("fs"); //file system
 const Collections = require("./collections");
 
