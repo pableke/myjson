@@ -17,7 +17,7 @@ Suitable for applications that have their own database control.
 
 1. Install by npm:
 
-    ```sh
+    ```
     $ npm install myjson-box
     ```
 
