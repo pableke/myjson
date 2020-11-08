@@ -59,6 +59,19 @@ exports.close = function() {
 	return Promise.resolve(DBS);
 }
 
+JSON.format = function(str, arr, separator, empty) {
+	separator = separator || "";
+	empty = empty || "";
+
+	function fnFormat(obj, i) {
+		obj.index = i;
+		obj.count = i + 1;
+		return str.replace(/@(\w+);/g, function(m, k) { return obj[k] || empty; });
+	}
+
+	return arr ? arr.map(fnFormat).join(separator) : "";
+}
+
 //create the directory container
 fs.mkdir(dirname, 0777, err => {
 	if (err && (err.code != "EEXIST"))
