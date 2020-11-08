@@ -1,6 +1,6 @@
 {
   "name": "myjson-box",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Persistence for JSON data, as a database NO SQL",
   "main": "./src/myjson.js",
   "scripts": {
