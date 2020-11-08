@@ -54,6 +54,7 @@ module.exports = function(db, pathname) {
 	this.filter = function(cb) { return table.data.filter(cb); }
 	this.each = function(cb) { table.data.forEach(cb); return self; }
 	this.join = function(cb, tables) { return table.data.filter((row, i) => cb(row, i, tables)); }
+	this.format = function(str, arr, separator, empty) { return JSON.format(str, arr, separator, empty); }
 
 	this.insert = function(data) {
 		data._id = table.seq++;
