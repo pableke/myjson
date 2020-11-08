@@ -59,6 +59,7 @@ exports.close = function() {
 	return Promise.resolve(DBS);
 }
 
+//extends JSOn functionality
 JSON.format = function(str, arr, separator, empty) {
 	separator = separator || "";
 	empty = empty || "";
