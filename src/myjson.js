@@ -59,7 +59,7 @@ exports.close = function() {
 	return Promise.resolve(DBS);
 }
 
-JSON.format = function(str, arr, separator, empty) {
+JSON.format = function(str, data, separator, empty) {
 	separator = separator || "";
 	empty = empty || "";
 
@@ -69,7 +69,9 @@ JSON.format = function(str, arr, separator, empty) {
 		return str.replace(/@(\w+);/g, function(m, k) { return obj[k] || empty; });
 	}
 
-	return arr ? arr.map(fnFormat).join(separator) : "";
+	if (!data)
+		return str; //no format data to apply on string
+	return Array.isArray(data) ? data.map(fnFormat).join(separator) : fnFormat(str, data, 0);
 }
 
 //create the directory container
