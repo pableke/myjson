@@ -47,6 +47,7 @@ module.exports = function(dbs, pathname) {
 			self.get(last).then(table => { addTable(table); resolve(tablesLoaded); });
 		});
 	}
+	this.format = JSON.format;
 	this.join = function(cb, tables) {
 		return this.load(tables).then(tables => tables.shift().join(cb, tables));
 	}

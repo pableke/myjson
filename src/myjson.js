@@ -60,18 +60,26 @@ exports.close = function() {
 }
 
 //extends JSOn functionality
-JSON.format = function(str, arr, separator, empty) {
-	separator = separator || "";
-	empty = empty || "";
+JSON.format = function(str, data, opts) {
+	opts = opts || {}; //default settings
+	opts.separator = opts.separator || "";
+	opts.empty = opts.empty || "";
 
 	function fnFormat(obj, i) {
 		obj.index = i;
 		obj.count = i + 1;
-		return str.replace(/@(\w+);/g, function(m, k) { return obj[k] || empty; });
+		return str.replace(/@(\w+);/g, function(m, k) {
+			let fn = opts[k]; //field format function
+			let value = fn ? fn(obj[k]) : obj[k]; //value = string
+			return value || opts.empty;
+		});
 	}
 
-	return arr ? arr.map(fnFormat).join(separator) : "";
+	if (!data)
+		return str; //no format data to apply on string
+	return Array.isArray(data) ? data.map(fnFormat).join(opts.separator) : fnFormat(data, 0);
 }
+exports.format = JSON.format;
 
 //create the directory container
 fs.mkdir(dirname, 0777, err => {
