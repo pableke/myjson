@@ -7,7 +7,7 @@
     "start": "node ./src/test.js",
     "dev": "nodemon ./src/test.js",
     "test": "node ./src/test.js",
-    "zip": "rm *.zip & rm *.tgz & npm-pack-zip"
+    "zip": "rm *.zip & rm *.tgz & npm-pack-zip & npm pack"
   },
   "keywords": [
     "database",
