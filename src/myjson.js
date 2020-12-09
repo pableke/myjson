@@ -3,6 +3,7 @@ const fs = require("fs"); //file system
 const Collections = require("./collections");
 
 const dirname = "./dbs/";
+const ALL = 511; //0777; //permisos
 const DBS = {}; //container
 
 function fnError(err) {
@@ -24,7 +25,7 @@ function fnOpen(name) {
 			return resolve(DBS[name]);
 
 		//create the directory container
-		fs.mkdir(dirname + name, 0777, function(err) {
+		fs.mkdir(dirname + name, ALL, function(err) {
 			return (err && (err.code != "EEXIST")) ? reject(fnError(err)) : resolve(fnAdd(name));
 		});
 	});
@@ -82,7 +83,7 @@ JSON.format = function(str, data, opts) {
 exports.format = JSON.format;
 
 //create the directory container
-fs.mkdir(dirname, 0777, err => {
+fs.mkdir(dirname, ALL, err => {
 	if (err && (err.code != "EEXIST"))
 		return fnError(err);
 });

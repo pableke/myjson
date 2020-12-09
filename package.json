@@ -6,8 +6,8 @@
   "scripts": {
     "start": "node ./src/test.js",
     "dev": "nodemon ./src/test.js",
-    "test": "node ./src/test.js",
-    "zip": "rm *.zip & rm *.tgz & npm-pack-zip & npm pack"
+    "zip": "rm *.zip & rm *.tgz & npm-pack-zip & npm pack",
+    "test": "jest --watch --verbose ./tests"
   },
   "keywords": [
     "database",
@@ -27,7 +27,11 @@
   },
   "homepage": "https://github.com/pableke/myjson#readme",
   "devDependencies": {
+    "jest": "^26.6.3",
     "nodemon": "^2.0.6",
     "npm-pack-zip": "^1.2.7"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": ["dbs"]
   }
 }
